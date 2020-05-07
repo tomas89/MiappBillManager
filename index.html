@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <title>app tareas</title>
+</head>
+<body>
+    
+        
+
+
+        <div class="container">
+    
+            <div class="bloque borderBottom " style="color: rgba(0, 0, 0, 0.7); padding-top: 30px;">
+                <img src="img/profile.jpg" alt="">
+                <div class="cuenta"> 
+                    <p class="money">Your Money</p>
+                     <p class="cant" id="saldo"> 500.23  <span>USD</span> </p>
+                </div>
+            </div>
+
+
+            <div class="bloque flex " style="box-shadow: 0px 0px 2px #888;margin-top:55px">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito negativo">
+                     -300.00
+                </div>
+            </div>
+
+            
+            <div class="bloque flex">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito positivo">
+                     +300.00
+                </div>
+            </div>
+            
+            <div class="bloque flex">
+                 <div class="entidad">
+                     Retiro cajero Miami Beach
+                 </div>
+ 
+                 <div class="debito negativo">
+                     -300.00
+                 </div>
+             </div>
+
+             
+            <div class="bloque flex">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito positivo">
+                     +300.00
+                </div>
+            </div>
+
+             <div class="bloque flex">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito negativo">
+                     -300.00
+                </div>
+            </div>
+
+            <div class="bloque flex">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito negativo">
+                     -300.00
+                </div>
+            </div>
+
+            
+            <div class="bloque flex">
+                <div class="entidad">
+                    Retiro cajero Miami Beach
+                </div>
+
+                <div class="debito positivo">
+                     +300.00
+                </div>
+            </div>
+            
+        
+            <div class="button" id="button" >
+                <a href="#">+</a>
+            </div>
+        </div>
+
+
+        <div class="input" id="inputMainBill">
+
+            <form action="">
+
+                <div class="item">                        
+                        <div class="image">
+                            <img src="img/profile.jpg" alt="">
+                        </div>
+                        <i class="material-icons close" >close</i>
+                            <div class="total" id="total"></div>
+                            <select name="transaccion" id="transaccion">
+                                <option value="">Elige un tipo de operacion</option>
+                                <option value="deuda" id="deuda">Deuda</option>
+                                <option value="Ingreso" id="ingreso">Ingreso</option>
+                            </select>
+                        <input type="number" id="valor" name="valor" min="0" max="100"> 
+                        <input type="button" value="CONFIRM" id="enviarOperacion">
+                </div>
+
+            </form>
+        </div>
+
+     
+        <script>
+
+            //este variable permite llamar al popup
+            var buttonMenu = document.getElementById("button");
+
+            //aqui se llama al id que contiene el popup
+            var inputMainBill = document.getElementById("inputMainBill");
+
+            //esta variable llama al elemento que va a cerrar el popup
+            var closeInput = document.querySelector(".item .close");
+
+            //Estas variables son para hacer las respectivas operaciones de agregar o restar el saldo
+            var ingreso = document.getElementById("ingreso");
+            var deuda = document.getElementById("deuda");
+            var valor = document.getElementById("valor");
+
+            //mostrara el total
+            var total = document.getElementById("saldo");
+
+            var enviarOperacion = document.getElementById("enviarOperacion");
+
+
+            enviarOperacion.addEventListener('click', realizarOperacion);
+
+            closeInput.addEventListener('click', closeInputPopup);
+
+            buttonMenu.addEventListener('click', addDebito);
+
+            var suma = 0;
+
+            var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
+
+            var saldo = 0;
+          
+            function determinaTransaccion (){
+
+               var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
+
+                
+              for(var i = 0; i < datos.length; i++){
+
+                determina = datos[i][2]; 
+                console.log(datos[i][1]);
+                if(determina == 1){
+                    saldo+= datos[i][1];
+                    console.log("He sumado");
+                }else if(determina == 0){
+                    saldo-= datos[i][1];
+                    console.log("He restado");
+                }
+
+              }
+              console.log("Soy el saldo" + saldo);
+            }
+
+            determinaTransaccion();
+
+            total.innerHTML = saldo;
+
+
+            var suma2 = 0;
+
+           function realizarOperacion(){
+                      
+               deuda = 0;
+               ingreso = 1;
+               var valor = document.getElementById("valor");
+               valor = valor.value;
+               alert(valor);
+           
+                datos.push(valor);
+
+                for(var i = 0; i < datos.length; i++){
+
+                    suma+= datos[i];
+                }
+                suma= 0;
+           }
+/*
+           MisTransas.forEach(function(numero){
+                        suma2 += numero;
+                    });
+
+*/
+
+           function closeInputPopup(){
+               console.log("Cerrare el popup");
+               inputMainBill.style.display = "none";
+           } 
+
+           function addDebito (){
+                console.log("Voy a agregar un debito ");
+
+                inputMainBill.style.display="block";
+
+            }
+
+
+
+
+
+              
+        </script>
+
+</body>
+</html>
