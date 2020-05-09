@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css?v=3">
+    <link rel="stylesheet" href="css/main.css?v=3.4">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-    <title>app tareas</title>
+    <title>Manager App</title>
 </head>
 <body>
     
@@ -22,84 +22,17 @@
                 <img src="img/profile.jpg" alt="">
                 <div class="cuenta"> 
                     <p class="money">Your Money</p>
-                     <p class="cant" id="saldo"> 500.23  <span>USD</span> </p>
+                     <p class="cant" id="saldo"> 0 </p> 
                 </div>
             </div>
 
 
-            <div class="bloque flex " style="box-shadow: 0px 0px 2px #888;margin-top:55px">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito negativo">
-                     -300.00
-                </div>
-            </div>
-
-            
-            <div class="bloque flex">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito positivo">
-                     +300.00
-                </div>
-            </div>
-            
-            <div class="bloque flex">
-                 <div class="entidad">
-                     Retiro cajero Miami Beach
-                 </div>
- 
-                 <div class="debito negativo">
-                     -300.00
-                 </div>
-             </div>
-
+            <div class="bloque " style="box-shadow: 0px 0px 2px #888;margin-top:55px" id="contEnt">
              
-            <div class="bloque flex">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito positivo">
-                     +300.00
-                </div>
-            </div>
-
-             <div class="bloque flex">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito negativo">
-                     -300.00
-                </div>
-            </div>
-
-            <div class="bloque flex">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito negativo">
-                     -300.00
-                </div>
             </div>
 
             
-            <div class="bloque flex">
-                <div class="entidad">
-                    Retiro cajero Miami Beach
-                </div>
-
-                <div class="debito positivo">
-                     +300.00
-                </div>
-            </div>
-            
+      
         
             <div class="button" id="button" >
                 <a href="#">+</a>
@@ -111,16 +44,20 @@
 
             <form action="">
 
-                <div class="item">                        
+                <div class="item" id="item">                        
                         <div class="image">
                             <img src="img/profile.jpg" alt="">
                         </div>
                         <i class="material-icons close" >close</i>
                             <div class="total" id="total"></div>
+                            <div class="cont">
+                                <input type="text" id="entidad" required=""  >
+                                <label for="" id="labelEnt">Ingresa la entidad</label>
+                            </div>                    
                             <select name="transaccion" id="transaccion">
                                 <option value="">Elige un tipo de operacion</option>
-                                <option value="deuda" id="deuda">Deuda</option>
-                                <option value="Ingreso" id="ingreso">Ingreso</option>
+                                <option value="0" id="deuda">Deuda</option>
+                                <option value="1" id="ingreso">Ingreso</option>
                             </select>
                         <input type="number" id="valor" name="valor" min="0" max="100"> 
                         <input type="button" value="CONFIRM" id="enviarOperacion">
@@ -143,31 +80,78 @@
 
             //Estas variables son para hacer las respectivas operaciones de agregar o restar el saldo
             var ingreso = document.getElementById("ingreso");
-            var deuda = document.getElementById("deuda");
-            var valor = document.getElementById("valor");
-
+        
             //mostrara el total
             var total = document.getElementById("saldo");
 
+            //Esta variable capturara el nombre de la entidad
+            var entidad = document.getElementById("entidad");
+
+
+            //variable que contiene el label para animar el input
+            var labelEnt = document.getElementById("labelEnt");
+
+
             var enviarOperacion = document.getElementById("enviarOperacion");
 
+            //este evento animara el input al agregar una entidad
+            entidad.addEventListener('focus', animaInput);
+
+           //var item = document.getElementById("item");
 
             enviarOperacion.addEventListener('click', realizarOperacion);
 
             closeInput.addEventListener('click', closeInputPopup);
 
             buttonMenu.addEventListener('click', addDebito);
+           //item.addEventListener('click',devuelveLabel);
 
-            var suma = 0;
+            function animaInput(){
+        
+                var entidad = document.getElementById("entidad");
+                console.log(entidad.value);
 
-            var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
+                if(document.getElementById("entidad").focus()){
+                    console.log("No tengo nada");
+                }else{
+                    console.log("Tengo un")
+                }
+                /*
+
+                if(  entidad.value == "" ){
+                    labelEnt.style.top = '-25px';labelEnt.style.fontSize = '14px';  
+                    console.log(entidad.focus());
+                    console.log("ingrese aqui");
+                }else{
+                    console.log(entidad.value);
+                    console.log("estoy aplicando estos estilos");
+                    labelEnt.style.top = '0',labelEnt.style.fontSize = '16px';
+                   
+                }
+                */
+              
+            }
+
+          function devuelveLabel (){
+
+                    labelEnt.style.top = '0',labelEnt.style.fontSize = '16px';
+                    console.log("estoy aplicando estos estilos");
+              
+            }
+
+            var suma = 0;   
+
+            //var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
+
+            var datos = [];
 
             var saldo = 0;
           
             function determinaTransaccion (){
 
-               var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
-
+              // var datos = [['cajero ath', 200, 1], ['claro', 150, 0],['bancolombia', 300, 1],['Banco Bogota', 170, 0]];
+            
+              var datos = []
                 
               for(var i = 0; i < datos.length; i++){
 
@@ -175,7 +159,7 @@
                 console.log(datos[i][1]);
                 if(determina == 1){
                     saldo+= datos[i][1];
-                    console.log("He sumado");
+                    console.log("Es una suma");
                 }else if(determina == 0){
                     saldo-= datos[i][1];
                     console.log("He restado");
@@ -187,33 +171,99 @@
 
             determinaTransaccion();
 
-            total.innerHTML = saldo;
-
-
             var suma2 = 0;
 
+            var contEnt = document.getElementById("contEnt");
+            var contCant = document.getElementById("contCant");
+
+            function creaElemento(){
+                
+                var ent = document.getElementById("entidad");
+                ent = ent.value;
+
+                var valor = document.getElementById("valor");
+               valor = valor.value;
+
+             
+
+                var div = document.createElement("div");
+                var content = document.createTextNode(ent);
+                div.appendChild(content);
+
+                div.classList = "entidad";
+
+                var div2 = document.createElement("div");
+                var cont2 = document.createTextNode(valor);
+                div2.appendChild(cont2);
+                div2.classList = "entidad";
+
+                var divCont = document.createElement("div");
+                divCont.classList ="flex";
+                divCont.appendChild(div);
+                divCont.appendChild(div2);
+        
+        
+
+                var contEnt = document.getElementById("contEnt");
+                contEnt.appendChild(divCont);
+              
+            }
+
            function realizarOperacion(){
-                      
-               deuda = 0;
-               ingreso = 1;
+
+
+            var ent = document.getElementById("entidad");
+         //   deuda = deuda.value;
+         //   ingreso = ingreso.value;
+             ent = ent.value;
+
+              
+            var transaccion =  document.getElementById("transaccion").value;
+
+                saldo = 0;
+               console.log(transaccion);
+
+
                var valor = document.getElementById("valor");
                valor = valor.value;
-               alert(valor);
-           
-                datos.push(valor);
+               valor = [ent , parseInt(valor) , parseInt(transaccion)] ;
 
-                for(var i = 0; i < datos.length; i++){
+               console.log(valor);
 
-                    suma+= datos[i];
+               datos.push(valor);
+
+               console.log(datos);             
+
+                console.log( typeof(valor));
+
+                for(var i = 0; i < datos.length ; i++){
+    
+
+                  //  suma+= datos[i][1];
+                    //console.log( suma);
+                    determina = datos[i][2]; 
+                console.log(datos[i][1]);
+                if(determina == 1){
+                    saldo+= datos[i][1];
+                    console.log("Es una suma");
+                }else if(determina == 0){
+                    saldo-= datos[i][1];
+                    console.log("He restado");
                 }
-                suma= 0;
-           }
-/*
-           MisTransas.forEach(function(numero){
-                        suma2 += numero;
-                    });
+                }
+                //console.log("Debo arrojar un monto" + datos[0][1]);
+                creaElemento();
+                total.innerHTML = `${saldo} <span class>USD</span>` ;
+                console.log("Soy el saldo total: " + saldo);
+                saldo = 0;
+                suma = 0;
 
-*/
+               
+                
+           }
+
+         
+
 
            function closeInputPopup(){
                console.log("Cerrare el popup");
