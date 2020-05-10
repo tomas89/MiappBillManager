@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', function(){
                 //EVENTOS
             //este evento animara el input al agregar una entidad
-            entidad.addEventListener('focus', animaInput);
+            entidad.addEventListener('focusout', animaOut);
+            entidad.addEventListener('focusin', animaIn);
             //var item = document.getElementById("item");
             enviarOperacion.addEventListener('click', realizarOperacion);
             closeInput.addEventListener('click', closeInputPopup);
             buttonMenu.addEventListener('click', addDebito);
             //item.addEventListener('click',devuelveLabel);
-
 });
-
 //este variable permite llamar al popup
 var buttonMenu = document.getElementById("button");
 //aqui se llama al id que contiene el popup
@@ -26,9 +25,10 @@ var entidad = document.getElementById("entidad");
 var labelEnt = document.getElementById("labelEnt");
 var enviarOperacion = document.getElementById("enviarOperacion");
 
+function animaIn(){labelEnt.style.top = '-25px';labelEnt.style.fontSize = '14px';}
 
-function animaInput(){var entidad = document.getElementById("entidad");console.log(entidad.value);if(entidad.value == ""){console.log("No tengo nada");}else{console.log("Tengo un")}
-    /*if(  entidad.value == "" ){labelEnt.style.top = '-25px';labelEnt.style.fontSize = '14px'; console.log(entidad.focus());console.log("ingrese aqui");}else{console.log(entidad.value);console.log("estoy aplicando estos estilos");labelEnt.style.top = '0',labelEnt.style.fontSize = '16px';}*/}
+function animaOut(){ var entidad = document.getElementById("entidad").value;if(entidad == "" ){labelEnt.style.top = '0';labelEnt.style.fontSize = '16px';}}
+
 function creaElemento(){    
     contEnt = document.getElementById("contEnt"), contCant = document.getElementById("contCant");
     var ent = document.getElementById("entidad");ent = ent.value;
@@ -43,13 +43,41 @@ var suma = 0, datos = [], saldo = 0;
 
 function realizarOperacion(){
     var ent = document.getElementById("entidad").value,transaccion =  document.getElementById("transaccion").value, valor = document.getElementById("valor").value;
-    valor = [ent , parseInt(valor) , parseInt(transaccion)] ;datos.push(valor);
-        for(var i = 0; i < datos.length ; i++){determina = datos[i][2]; if(determina == 1){ saldo+= datos[i][1];console.log("Es una suma");}else if(determina == 0){saldo-= datos[i][1];console.log("He restado");}}
+
+    valor.trim();
+    ent.trim();
+    transaccion.trim();
+
+    console.log(transaccion);
+    console.log(ent);
+    console.log(valor);
+
+    valor = [  , parseInt(valor) , parseInt(transaccion)] ;datos.push(valor);
+
+    console.log(transaccion);
+      
+            
+    if(transaccion != "" && valor != "" && valor!= null && ent != ""  ){alert("haz llenado todos los campos");
+
+
+    for(var i = 0; i < datos.length ; i++){            
+        console.log("Bien los has llenado todos los campos");
+        determina = datos[i][2]; if(determina == 1){ saldo+= datos[i][1];console.log("Es una suma");}else if(determina == 0){saldo-= datos[i][1];console.log("He restado");}}
         creaElemento();
         total.innerHTML = `${saldo} <span class>USD</span>` ;
         console.log("Soy el saldo total: " + saldo);
         saldo = 0;
-        suma = 0;    
+        suma = 0;
+
+}
+    
+    else{
+        alert("Debes llenar todos los campos");
+        console.log(transaccion);
+        console.log(ent);
+        console.log(valor);
+        }
+            
     }
 
 function closeInputPopup(){inputMainBill.style.display = "none";} 
