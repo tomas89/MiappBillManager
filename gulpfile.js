@@ -7,7 +7,7 @@ const autoprefixer = require ('gulp-autoprefixer');
 
 gulp.task('sass', ()=>{
 
-    gulp.src('./scss/main.scss')
+    gulp.src('./scss/*')
         .pipe(sass({
             outputStyle:'compact'
         }))

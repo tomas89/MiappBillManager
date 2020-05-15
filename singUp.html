@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <h3>WELCOME ,</h3>
+            <h3>SIGN UP TO CONTINUE</h3>
+            <H3 style=" color: rgba(0,0,0,.5); font-weight: 100;" >APP BILL MANAGER</H3>
+            
+            <div class="group" style="margin-top: 45px;" >
+                <input type="text" id="name"  >
+                <label id="labName" for="name" >Name</label>
+            </div>
+
+            <div class="group">
+                <input type="email" id="email"  >
+                <label id="labEmail" for="email" >Mail</label>
+            </div>
+    
+            <div class="group">
+                <input type="password" id="password"  >
+                <label id="labPass" for="password">Password</label>
+            </div>
+            <div class="group">
+                <input type="password" id="ConfPassword"  >
+                <label id="labConfPassword" for="Confpassword">Confirm your password</label>
+            </div>
+            <div class="group">
+                <button type="submit" class="buttonSignUp">Get Started <i style="margin-left: 15px;" class="fas fa-long-arrow-alt-right"></i> </button>
+            </div>
+        </form>
+        <div class="error"  id="error" ></div>
+    </div>
+    
+    <script>
+
+        //eventos
+        document.addEventListener('DOMContentLoaded', function(){
+        
+        //Input name
+        nme.addEventListener('focusin', animaNameIn);
+        nme.addEventListener('focusout', animaNameOut);
+
+        //Input email
+        email.addEventListener('focusin', animaEmailIn);
+        email.addEventListener('focusout', animaEmailOut);
+        // input password
+        password.addEventListener('focusout', animaPassOut);
+        password.addEventListener('focusin', animaPassIn);
+
+
+        //input label que confirma el pass
+        ConfPassword.addEventListener('focusin', animaConfPassIn);
+        ConfPassword.addEventListener('focusout', animaConfPassOut);
+
+        //Se envian los datos y nos envia al login
+        form.addEventListener('submit', enviaDatos);
+
+        });
+
+
+        function enviaDatos (e)   {
+            e.preventDefault();
+
+            let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+
+            let regexp_password =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
+            
+            var error = document.getElementById("error");
+            var nme = document.getElementById("name");
+            var email = document.getElementById("email");
+            var password = document.getElementById("password");
+            var ConfPassword = document.getElementById('ConfPassword');
+
+
+            console.log(nme.value.length);
+            console.log(nme.value);
+            console.log("El name vale " + nme.value.length);
+            console.log(`el error ${error.innerHTML}`);
+
+            
+            nme = nme.value;
+            email = email.value;
+            password = password.value;
+            ConfPassword = ConfPassword.value;
+            console.log( "El confir pass es " + ConfPassword);
+
+            console.log ("El pass es" + password);
+
+            if(nme == ""){
+                console.log("el campo name esta vacio");
+                error.innerHTML = " El campo name esta vacio ";
+                return false;
+            }
+            else if( nme.length < 10){
+                console.log("Debes ingresar al menos dos palabras");
+                error.innerHTML = " Debes Ingresar al menos dos palabras ";
+                return false;
+            }
+
+            else if( email == ""){
+                console.log("El campo email esta vacio");
+                error.innerHTML = " El campo email esta vacio ";
+                return false;
+            }
+
+            else if (!emailRegex.test(email)){
+                ("Falta simbolo @ o .");
+                console.log("Falta simbolo @ o .");
+                error.innerHTML = " Falta un @ o un punto";
+                return false;
+            }
+
+            else if( password == ""){
+                console.log("El campo Password esta vacio");
+                error.innerHTML = " El campo password esta vacio ";
+                return false;
+            }
+
+            else if ( !regexp_password.test(password)){
+                console.log( ` Debes ingresar al menos 8 caracteres , 
+                al menos una letra minuscula,
+                al menos un digito, no debes ingresar
+                espacion en blanco y un caracter especial
+                ` );
+
+                error.innerHTML = " Debes ingresar minimo 8 caracteres , una mayuscula, un digito y un caracter especial ";
+            }
+
+            else if(password < 7){
+                console.log("El password es muy corto");
+                error.innerHTML = " El password es muy corto ";
+            }
+            
+            else if(ConfPassword == ""){
+
+                error.innerHTML = " No has confirmado la contraseña ";
+                console.log("No ha confirmado la contraseña");
+            }
+
+            else if(password != ConfPassword ){
+                error.innerHTML = " Las contraseñas no coinciden ";
+                console.log("Las contraseñas no coinciden")
+            }
+
+
+
+
+
+
+            if(password != ""  && emailRegex.test(email) && email !="" && nme !="" && password == ConfPassword && regexp_password.test(password)){
+                error.innerHTML = "send";
+                window.location.href = "login.html";
+                console.log("Nos envia al login");
+            }else{
+                error.innerHtml = "La has cagado";
+            }
+}  
+
+
+
+var nme = document.getElementById("name");
+//label Name
+var labelName = document.getElementById("labName");
+//Contiene el email
+var email = document.getElementById("email");
+//label email
+var labelEmail = document.getElementById("labEmail");
+//Contiene el password
+var password = document.getElementById("password");
+//label password
+var labelPass = document.getElementById("labPass");
+
+//variable que confirma el pass
+var ConfPassword = document.getElementById("ConfPassword");
+//label que confirma password
+var labConfPassword = document.getElementById("labConfPassword");
+//variable que contiene al formulario
+var form = document.querySelector(".container form");
+
+function animaNameIn(){
+    labelName.style.top = '-18px';
+    labelName.style.fontSize = '14px';}
+
+function animaNameOut(){
+     var nme = document.getElementById("name").value;
+     if(nme == "" ){
+         labelName.style.top = '0';labelName.style.fontSize = '16px';
+        }}
+
+
+function animaEmailIn(){
+    labelEmail.style.top = '-18px';
+    labelEmail.style.fontSize = '14px';}
+
+function animaEmailOut(){
+     var email = document.getElementById("email").value;
+     if(email == "" ){
+         labelEmail.style.top = '0';labelEmail.style.fontSize = '16px';
+        }}
+
+function animaPassIn(){
+    labelPass.style.top = '-18px';
+    labelPass.style.fontSize = '14px';
+}
+
+function animaPassOut(){
+     var password = document.getElementById("password").value;
+     if(password == "" )
+     {
+         labelPass.style.top = '0';
+         labelPass.style.fontSize = '16px';
+    }
+}
+
+function animaConfPassIn(){
+    labConfPassword.style.top = '-18px';
+    labConfPassword.style.fontSize = '14px';
+}
+
+function animaConfPassOut(){
+    var ConfPassword = document.getElementById("ConfPassword").value;
+    if(ConfPassword == ""){
+        labConfPassword.style.top = '0';
+        labConfPassword.style.fontSize = '16px';
+    }
+}
+
+
+
+    </script>
+</body>
+</html>

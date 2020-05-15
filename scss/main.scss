@@ -107,6 +107,7 @@ body{
                                     font-size: 15px;
                                     color: rgba(0, 0, 0, 0.6);
                                     border: none;
+                                    outline: none;
                                 
                     
 
@@ -193,7 +194,7 @@ body{
         box-shadow: 5px 5px 5px -7px #888888;
 
         .negativo{
-            color: #e84118;
+            color: #e84118 !important;
         }
         .positivo{
             color: rgba(0,0,0,.5);

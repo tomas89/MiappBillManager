@@ -20,7 +20,7 @@ body .input form .item select[name="transaccion"] { color: rgba(0, 0, 0, 0.6); w
 
 body .input form .item .cont { width: 100%; position: relative; margin: 15px 0px; font-family: "Lato", sans-serif; }
 
-body .input form .item .cont input[type="text"] { border-radius: 5px; width: 86%; padding: 10px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.3); font-size: 15px; color: rgba(0, 0, 0, 0.6); border: none; }
+body .input form .item .cont input[type="text"] { border-radius: 5px; width: 86%; padding: 10px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.3); font-size: 15px; color: rgba(0, 0, 0, 0.6); border: none; outline: none; }
 
 body .input form .item .cont label { position: absolute; top: 0px; left: 16px; margin: 0px 10px; -webkit-transition: top .10s ease-in-out, font-size .2s ease-in-out; -o-transition: top .10s ease-in-out, font-size .2s ease-in-out; transition: top .10s ease-in-out, font-size .2s ease-in-out; text-align: left; padding: 10px 0; color: rgba(0, 0, 0, 0.6); }
 
@@ -36,7 +36,7 @@ body .container .button a { text-decoration: none; color: #fff; font-weight: bol
 
 body .container .flex { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-pack: distribute; justify-content: space-around; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 25px 0; border-width: 0px 0px 1px; border-style: solid; border-color: rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px 5px -7px #888888; box-shadow: 5px 5px 5px -7px #888888; }
 
-body .container .flex .negativo { color: #e84118; }
+body .container .flex .negativo { color: #e84118 !important; }
 
 body .container .flex .positivo { color: rgba(0, 0, 0, 0.5); }
 
